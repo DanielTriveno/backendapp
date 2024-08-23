@@ -5,7 +5,10 @@ namespace WebApiUser.Repository.IRepository
 {
     public interface IUserRepository
     {
+        ICollection<User> GetUsers();
         User GetUser(int userId);
+
+        User GetLatestUser();
         bool IsUniqueUser(string username);
         bool ExistUser(int userId);
         bool UpdateUser (User user);

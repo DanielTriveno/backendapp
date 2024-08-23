@@ -23,6 +23,19 @@ namespace WebApiUser.Controllers
             this._responseApi = new();
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult GetUsers()
+        {
+            var listUsers = _usRepo.GetUsers();
+            var listUsersDto = new List<UserDto>();
+            foreach ( var list in listUsers)
+            {
+                listUsersDto.Add(_mapper.Map<UserDto>(list));
+            }
+            return Ok(listUsersDto);
+        }
 
         [HttpGet("{userId:int}", Name = "GetUser")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -39,8 +52,20 @@ namespace WebApiUser.Controllers
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
         }
+        [HttpGet("latest")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetLatestUser()
+        {
+            var latestUser = _usRepo.GetLatestUser();
+            if (latestUser == null)
+            {
+                return NotFound();
+            }
+            var latestUserDto = _mapper.Map<UserDto>(latestUser);
+            return Ok(latestUserDto);
+        }
 
-       
         [HttpPatch("{userId:int}", Name = "UpdatePatchUser")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

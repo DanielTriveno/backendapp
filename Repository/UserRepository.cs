@@ -15,6 +15,11 @@ namespace WebApiUser.Repository
         private readonly AppDbContext _db;
         private string secretKey;
 
+
+        public ICollection<User> GetUsers()
+        {   
+            return _db.Users.OrderBy(c => c.Id).ToList();
+        }
         public UserRepository(AppDbContext db, IConfiguration config) { 
            _db = db;
             secretKey = config.GetValue<string>("ApiSettings:Secret");
@@ -36,8 +41,10 @@ namespace WebApiUser.Repository
         {
             return _db.Users.FirstOrDefault(c => c.Id == userId);
         }
-
-
+        public User GetLatestUser()
+        {
+            return _db.Users.OrderByDescending(u => u.Id).FirstOrDefault();
+        }
         public bool IsUniqueUser(string username)
         {
             var userDb = _db.Users.FirstOrDefault(u => u.UserName == username);

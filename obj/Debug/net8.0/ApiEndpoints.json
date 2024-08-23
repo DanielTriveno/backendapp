@@ -1,6 +1,31 @@
 [
   {
     "ContainingType": "WebApiUser.Controllers.UsersController",
+    "Method": "GetUsers",
+    "RelativePath": "api/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApiUser.Controllers.UsersController",
     "Method": "GetUser",
     "RelativePath": "api/users/{userId}",
     "HttpMethod": "GET",
@@ -149,6 +174,31 @@
       }
     ],
     "EndpointName": "DeleteUser"
+  },
+  {
+    "ContainingType": "WebApiUser.Controllers.UsersController",
+    "Method": "GetLatestUser",
+    "RelativePath": "api/users/latest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
   },
   {
     "ContainingType": "WebApiUser.Controllers.UsersController",
